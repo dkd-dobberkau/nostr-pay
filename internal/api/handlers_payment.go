@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"log/slog"
 	"net/http"
 
 	nostrauth "github.com/nostr-pay/nostr-pay/internal/nostr"
@@ -39,6 +40,7 @@ func (s *Server) handleCreateInvoice(w http.ResponseWriter, r *http.Request) {
 		Memo:           req.Memo,
 	})
 	if err != nil {
+		slog.Error("failed to create invoice", "error", err)
 		http.Error(w, "failed to create invoice", http.StatusInternalServerError)
 		return
 	}
