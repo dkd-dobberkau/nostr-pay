@@ -12,6 +12,7 @@ func (s *Server) Routes() http.Handler {
 	// Public endpoints
 	mux.HandleFunc("GET /api/health", s.handleHealth)
 	mux.HandleFunc("POST /api/payments/webhook", s.handleWebhook)
+	mux.HandleFunc("GET /api/ws", s.handleWS)
 
 	// Authenticated endpoints
 	mux.Handle("POST /api/payments/invoice", nostrauth.AuthMiddleware(

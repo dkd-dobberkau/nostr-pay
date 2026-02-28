@@ -8,11 +8,13 @@ import (
 type Server struct {
 	store      store.Store
 	paymentSvc *payment.Service
+	wsHub      *WSHub
 }
 
 func NewServer(store store.Store, paymentSvc *payment.Service) *Server {
 	return &Server{
 		store:      store,
 		paymentSvc: paymentSvc,
+		wsHub:      NewWSHub(),
 	}
 }

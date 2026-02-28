@@ -98,5 +98,7 @@ func (s *Server) handleWebhook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	s.wsHub.NotifyPayment(payload.PaymentHash, "paid")
+
 	w.WriteHeader(http.StatusOK)
 }
