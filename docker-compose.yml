@@ -3,7 +3,7 @@ services:
     image: lnbits/lnbits:latest
     container_name: nostr-pay-lnbits
     ports:
-      - "5000:5000"
+      - "5001:5000"
     environment:
       - LNBITS_ADMIN_UI=true
       - LNBITS_BACKEND_WALLET_CLASS=FakeWallet
