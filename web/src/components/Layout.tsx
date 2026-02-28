@@ -1,4 +1,7 @@
+import { useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
+import { useAuth } from '../stores/auth'
+import { LoginModal } from './LoginModal'
 
 const navItems = [
   { path: '/receive', label: 'Receive', icon: '↓' },
@@ -9,11 +12,35 @@ const navItems = [
 
 export function Layout() {
   const location = useLocation()
+  const { isLoggedIn, pubkey, logout } = useAuth()
+  const [showLogin, setShowLogin] = useState(false)
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col">
       <header className="px-4 py-3 border-b border-gray-800 flex items-center justify-between">
         <Link to="/" className="text-xl font-bold">nostr-pay</Link>
+        <div className="flex items-center gap-3">
+          {isLoggedIn ? (
+            <>
+              <span className="text-xs text-gray-400 font-mono">
+                {pubkey?.slice(0, 8)}...{pubkey?.slice(-4)}
+              </span>
+              <button
+                onClick={logout}
+                className="text-sm text-gray-400 hover:text-white border border-gray-700 px-3 py-1 rounded-lg"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => setShowLogin(true)}
+              className="text-sm bg-amber-500 hover:bg-amber-600 text-black font-bold px-4 py-1.5 rounded-lg"
+            >
+              Login
+            </button>
+          )}
+        </div>
       </header>
 
       <main className="flex-1 p-4">
@@ -38,6 +65,8 @@ export function Layout() {
           ))}
         </div>
       </nav>
+
+      {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
     </div>
   )
 }

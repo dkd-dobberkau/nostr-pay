@@ -10,8 +10,22 @@ function hexToBytes(hex: string): Uint8Array {
   return bytes
 }
 
-// Re-export for potential use
 export { bytesToHex }
+
+const SESSION_KEY = 'nostr-pay-sk'
+
+function loadFromSession(): { pubkey: string; secretKey: Uint8Array } | null {
+  const stored = sessionStorage.getItem(SESSION_KEY)
+  if (!stored || stored.length !== 64) return null
+  try {
+    const secretKey = hexToBytes(stored)
+    const pubkey = getPublicKey(secretKey)
+    return { pubkey, secretKey }
+  } catch {
+    sessionStorage.removeItem(SESSION_KEY)
+    return null
+  }
+}
 
 interface AuthState {
   pubkey: string | null
@@ -22,19 +36,22 @@ interface AuthState {
   createAuthToken: (url: string, method: string) => string
 }
 
+const initial = loadFromSession()
+
 export const useAuth = create<AuthState>((set, get) => ({
-  pubkey: null,
-  secretKey: null,
-  isLoggedIn: false,
+  pubkey: initial?.pubkey ?? null,
+  secretKey: initial?.secretKey ?? null,
+  isLoggedIn: !!initial,
 
   login: (secretKeyHex: string) => {
     const secretKey = hexToBytes(secretKeyHex)
     const pubkey = getPublicKey(secretKey)
-
+    sessionStorage.setItem(SESSION_KEY, secretKeyHex)
     set({ pubkey, secretKey, isLoggedIn: true })
   },
 
   logout: () => {
+    sessionStorage.removeItem(SESSION_KEY)
     set({ pubkey: null, secretKey: null, isLoggedIn: false })
   },
 

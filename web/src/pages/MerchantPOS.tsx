@@ -10,7 +10,15 @@ export function MerchantPOS() {
   const [state, setState] = useState<POSState>('input')
   const [invoice, setInvoice] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const { createAuthToken } = useAuth()
+  const { createAuthToken, isLoggedIn } = useAuth()
+
+  if (!isLoggedIn) {
+    return (
+      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+        <p className="text-gray-400">Login to use the POS</p>
+      </div>
+    )
+  }
 
   const handleNumpad = useCallback((key: string) => {
     setAmount((prev) => {

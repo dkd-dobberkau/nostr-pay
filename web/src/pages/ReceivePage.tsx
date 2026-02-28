@@ -9,7 +9,15 @@ export function ReceivePage() {
   const [invoice, setInvoice] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const { createAuthToken } = useAuth()
+  const { createAuthToken, isLoggedIn } = useAuth()
+
+  if (!isLoggedIn) {
+    return (
+      <div className="text-center pt-8">
+        <p className="text-gray-400">Login to receive payments</p>
+      </div>
+    )
+  }
 
   const handleGenerate = async () => {
     const sats = parseInt(amount)
