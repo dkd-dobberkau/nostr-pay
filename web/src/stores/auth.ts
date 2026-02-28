@@ -1,6 +1,17 @@
 import { create } from 'zustand'
 import { finalizeEvent, getPublicKey, type Event } from 'nostr-tools/pure'
-import { hexToBytes } from '@noble/hashes/utils'
+import { bytesToHex } from 'nostr-tools/utils'
+
+function hexToBytes(hex: string): Uint8Array {
+  const bytes = new Uint8Array(hex.length / 2)
+  for (let i = 0; i < hex.length; i += 2) {
+    bytes[i / 2] = parseInt(hex.substring(i, i + 2), 16)
+  }
+  return bytes
+}
+
+// Re-export for potential use
+export { bytesToHex }
 
 interface AuthState {
   pubkey: string | null

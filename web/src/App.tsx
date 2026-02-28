@@ -3,6 +3,7 @@ import { Layout } from './components/Layout'
 import { ReceivePage } from './pages/ReceivePage'
 import { PayPage } from './pages/PayPage'
 import { HistoryPage } from './pages/HistoryPage'
+import { MerchantPOS } from './pages/MerchantPOS'
 
 function Home() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/pay" element={<PayPage />} />
           <Route path="/history" element={<HistoryPage />} />
         </Route>
+        <Route path="/merchant/pos" element={<MerchantPOS />} />
       </Routes>
     </BrowserRouter>
   )
