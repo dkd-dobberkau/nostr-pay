@@ -28,6 +28,18 @@ Accept Bitcoin Lightning payments with [NIP-98](https://github.com/nostr-protoco
 - Real-time payment notifications via WebSocket
 - Session-based key storage (cleared on tab close)
 
+## For Customers (Paying)
+
+Customers don't need Nostr, an account, or any setup. They just need a **Lightning wallet** to scan the QR code:
+
+- [Wallet of Satoshi](https://www.walletofsatoshi.com/) — simplest option, custodial
+- [Phoenix](https://phoenix.acinq.co/) — self-custodial, recommended
+- [Zeus](https://zeusln.com/) — connects to your own node
+- [Alby](https://getalby.com/) — browser extension for desktop
+- [BlueWallet](https://bluewallet.io/) — well-known, easy to use
+
+The Nostr key is only needed for the **merchant** to log in and create invoices.
+
 ## Quick Start
 
 ### Prerequisites

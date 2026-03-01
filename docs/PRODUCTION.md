@@ -118,6 +118,20 @@ The money always sits on **your Lightning node**. nostr-pay and LNbits are just 
 
 LNbits can also manage multiple wallets on top of a single node, useful if you want to separate funds per merchant or purpose.
 
+## What Do Customers Need?
+
+Nothing special — just a Lightning wallet. Customers scan the QR code and pay a standard Lightning invoice. No Nostr key, no account, no app to install.
+
+Any Lightning wallet works:
+
+- [Wallet of Satoshi](https://www.walletofsatoshi.com/) — simplest, custodial
+- [Phoenix](https://phoenix.acinq.co/) — self-custodial, recommended
+- [Zeus](https://zeusln.com/) — connects to your own node
+- [Alby](https://getalby.com/) — browser extension for desktop
+- [BlueWallet](https://bluewallet.io/) — well-known, easy to use
+
+The Nostr key is only needed on the **merchant side** to log in and create invoices.
+
 ## Troubleshooting
 
 | Problem | Solution |
